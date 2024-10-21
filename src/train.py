@@ -1,14 +1,13 @@
-
 '''
 SCRIPT DESCRIPTION:
 
-This script is responsible for training a neural network that performs base information retrieval using sketches. 
+This script is responsible for training a neural network that performs base information retrieval using sketches.
 Afterwards, you can modify certain configurations.
 '''
 
 import torch
 from torch.optim import Adam
-from torch.utils.data import DataLoader 
+from torch.utils.data import DataLoader
 from torchvision.datasets import ImageFolder
 from torchvision import transforms
 from torch.utils.data import random_split
@@ -20,9 +19,18 @@ from Losses import *
 from EarlyStopper import *
 from TrainingFunctions import training_loop
 
+'''
+SCRIPT DESCRIPTION:
 
-dataset_paths = {'mini' : ["../Mini Dataset/photo", "../Mini Dataset/sketch"], 
+This script is responsible for training a neural network that performs base information retrieval using sketches. 
+Afterwards, you can modify certain configurations.
+'''
+
+dataset_paths = {'mini' : ["../Mini Dataset/photo", "../Mini Dataset/sketch"],
                  'full' : ["../Full Dataset/256x256/photo", "../Full Dataset/256x256/sketch"]}
+
+
+
 
 
 # ====================================
@@ -35,7 +43,7 @@ dataset_paths = {'mini' : ["../Mini Dataset/photo", "../Mini Dataset/sketch"],
 DATASET_NAME = 'mini'
 PHOTO_DATASET_PATH, SKETCHES_DATASET_PATH = dataset_paths[DATASET_NAME]
 
-#Pick a Dataset Type 
+#Pick a Dataset Type
 #   For training: ContrastiveDataset, TripletDataset, AugmentedContrastiveDataset, AugmentedTripletDataset
 #   For validation: ContrastiveDataset, TripletDataset
 #   IMPORTANT: If you are using an Augmented dataset remember to assing Composed Trasformations to TRANSFORMATION
@@ -77,7 +85,7 @@ K = 12
 BATCH_SIZE = 16
 
 #Pick a Backbone
-#   The backbone represents the neural network within the siamese network, 
+#   The backbone represents the neural network within the siamese network,
 #   after which several linear layers will be applied to produce an embedding of size EMBEDDING_SIZE.
 backbone = models.resnet34(weights = models.ResNet34_Weights.DEFAULT)
 
@@ -86,6 +94,9 @@ lr = 1e-4
 
 #Pick a number of Epochs
 num_epochs = 500
+
+
+
 
 
 # ====================================

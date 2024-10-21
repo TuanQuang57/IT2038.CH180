@@ -10,14 +10,16 @@ The input received here is
 
 class SiameseNetwork(Module):
 
-    def __init__(self, output: int, backbone: models) -> None:
+    def __init__(self, output: int, backbone: models):
         super(SiameseNetwork, self).__init__()
+
         self.backbone = backbone
-        self.backbone.fc = Sequential (
+
+        self.backbone.fc = Sequential(
             Linear(self.backbone.fc.in_features, 256),
-            ReLU(inplace = True),
+            ReLU(inplace=True),
             Linear(256, 128),
-            ReLU(inplace = True),
+            ReLU(inplace=True),
             Linear(128, output)
         )
 
